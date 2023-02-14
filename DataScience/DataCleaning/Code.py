@@ -4,7 +4,7 @@
 
 
 
-#Limpando dados da base
+#Cleaning the data base
 
 import pandas as pd
 base = pd.read_excel(r'C:\Users\SAMSUNG\Desktop\base\ChavesClientes.xlsx')
@@ -15,13 +15,13 @@ base.head()
 base.head()
 
 
-#Verificando Cardinalidade desses dados
+#Checking the cardinality of this data
 
 
 base.groupby(["Pagamento","ChaveSituacao"])["Pagamento"].count()
 
 
-#começando a separar a string da coluna
+#starting to separate string from column
 text = '32FC'
 text[2:3]
 
@@ -39,7 +39,7 @@ display(base)
 
 
 
-#Fazendo o split de um valor baseado em um delimitador
+#Splitting a value based on a delimiter
 texto = 'Basic-Alpha'
 texto.split('-')
 
@@ -49,7 +49,7 @@ base['CatVIP'] = base.CatCliente.str.split('-').str.get(1)
 base.head()
 
 
-#buscando a classificação do cliente dentro da coluna "Classe Risco"
+#searching for the client's classification within the "Classe Risco" column
 import re
 
 
@@ -57,22 +57,22 @@ base['Risco'] = base.ClassRisco.apply(lambda x:re.findall('^[A-Z][^A-Za-z]?' , x
 base.head()
 
 
-#apresentando a tipagem da idade vemos que ela está como objeto e não número
+#presenting the age typing we see that it is as an object and not a number
 base.info()
 
-#fazendo com que a idade seja do tipo número
+#making the age type number
 base['Idade'] = pd.to_numeric(base['Idade'])
 
 
 base.info()
 
 
-#Tratando valores vazios
+#Handling empty values
 base.loc[base.CatVIP.isnull(),"CatVIP"] = "Comum"
 base.head()
 
 
-#Finalizando limpeza deixando apenas as colunas organizadas
+#Finishing cleaning leaving only the columns organized
 base.drop(["ChaveSituacao"], axis=1, inplace=True)
 base.drop(["ClassRisco"], axis=1, inplace=True)
 base.drop(["CatCliente"], axis=1, inplace=True)
