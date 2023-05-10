@@ -1,1 +1,1 @@
-Modelo de site estático de notícias
+Static model of technology blog
